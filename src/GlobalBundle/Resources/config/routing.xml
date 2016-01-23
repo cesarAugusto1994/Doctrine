@@ -3,7 +3,13 @@
   <route id="global_homepage" path="/hello/{name}">
     <default key="_controller">GlobalBundle:Default:index</default>
   </route>
-  <route id="index" path="/index">
-    <default key="_controller">GlobalBundle:About:index</default>
+  <route id="global_index" path="/about">
+    <default key="_controller">GlobalBundle:About:about</default>
+  </route>
+  <route id="global_addAbout" path="/addAbout">
+    <default key="_controller">GlobalBundle:About:add</default>
+  </route>
+  <route id="global_formAbout" path="/formAbout">
+    <default key="_controller">GlobalBundle:About:new</default>
   </route>
 </routes>

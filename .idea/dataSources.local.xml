@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - doctrine@localhost" uuid="8304c918-525b-4d62-b6c9-35f65a7f446c">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>doctrine.*</schema-pattern>
+      <default-schemas>doctrine.*</default-schemas>
+    </data-source>
+  </component>
+</project>
