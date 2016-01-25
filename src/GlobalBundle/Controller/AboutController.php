@@ -4,12 +4,16 @@ namespace GlobalBundle\Controller;
 
 use Doctrine\DBAL\Types\IntegerType;
 use GlobalBundle\Entity\About;
+use Symfony\Component\Form\Forms;
 use GlobalBundle\Tests\Controller\AboutControllerTest;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Tests\Extension\Core\Type\SubmitTypeTest;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 
 class AboutController extends Controller
 {
@@ -41,17 +45,25 @@ class AboutController extends Controller
 
         $about = new About();
 
-        $about->setName('New About');
-        $about->setDescription('New Description');
         $about->setActive(1);
 
         $form = $this->createFormBuilder($about)
-            ->add('Name', TextType::class)
-            ->add('Description', TextType::class)
-            ->add('Active', TextType::class)
-            ->add('save', SubmitType::class, array('label' => 'Criar Registro'))
-        ->getForm();
+            ->add('name', 'text')
+            ->add('description', 'text')
+            ->add('save', 'submit', array('label' => 'Create Task'))
+            ->getForm();
 
-        return $this->render(':default:index.html.twig', array('form' => $form->createView()));
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            $repository = $this->getDoctrine()->getEntityManager();
+            $repository->persist($about);
+            $repository->flush();
+
+            return $this->redirectToRoute('global_index');
+        }
+
+        return $this->render('GlobalBundle:About:form.html.twig', array('form' => $form->createView()));
     }
 }

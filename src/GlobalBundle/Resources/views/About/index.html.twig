@@ -1,14 +1,22 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}About{% endblock %}
+{% block title %}Sobre{% endblock %}
 
 {% block body %}
 
-    {% for reg in about %}
+    <table class="table" border="1">
+        <tbody>
+        {% for reg in about %}
 
-        <h1>{{ reg.name }}</h1>
-        <p>{{ reg.description }}</p>
+            <tr>
+                <td>{{ reg.name|upper }}</td>
+                <td>{{ reg.description }}</td>
+            </tr>
 
-    {% endfor %}
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="glyphicon-ice-lolly" href="{{ path('global_formAbout') }}">New Row...</a>
 
 {% endblock %}
