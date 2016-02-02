@@ -1,22 +1,63 @@
-{% extends "::base.html.twig" %}
+{% extends "@Global/template.html.twig" %}
 
 {% block title %}Sobre{% endblock %}
 
 {% block body %}
 
-    <table class="table" border="1">
-        <tbody>
-        {% for reg in about %}
+    <div class="container-fluid">
 
-            <tr>
-                <td>{{ reg.name|upper }}</td>
-                <td>{{ reg.description }}</td>
-            </tr>
+        <table class="table table-bordered table-hovered">
+            <caption>About table</caption>
+            <tbody>
+            {% for reg in about %}
 
-        {% endfor %}
-        </tbody>
-    </table>
+                <tr>
+                    <td><button type="button" id="bt" class="btn btn-link glyphicon-edit" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Edit</button></td>
+                    <td>{{ reg.name|upper }}</td>
+                    <td>{{ reg.description }}</td>
+                </tr>
 
-    <a class="glyphicon-ice-lolly" href="{{ path('global_formAbout') }}">New Row...</a>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('global_formAbout') }}"><button class="btn btn-link glyphicon-bishop"> New Row... </button></a>
+        <a href="{{ path('global_formAbout') }}"><button class="btn btn-info glyphicon-alert"> << Back </button></a>
+
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">Recipient:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">Message:</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Send message</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
+
+{% block javascripts %}
+
+    <script type="text/javascript"></script>
+
+{% endblock %}
+
