@@ -42,6 +42,13 @@ class About
      */
     private $active;
 
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
     /**
      * Get id

@@ -22,29 +22,54 @@ class AboutController extends Controller
         $repository = $this->getDoctrine()->getEntityManager();
         $find = $repository->getRepository('GlobalBundle:About');
 
-        return $this->render('GlobalBundle:About:index.html.twig', array('about' => $find->findAll()));
+        return $this->render('GlobalBundle:About:index.html.twig', array('about' => $find->findBy(['active' => 1])));
     }
 
-    public function addAction(){
-
-        $e = new About();
-
-        $e->setName('About');
-        $e->setDescription('Well Done!, This is a tiny description.');
-        $e->setActive(1);
-
-        $repository = $this->getDoctrine()->getEntityManager();
-
-        $repository->persist($e);
-        $repository->flush();
-
-        return new Response('Now you have a new about row.');
-    }
-
-    public function newAction(Request $request){
-
+    public function EditAction(Request $request)
+    {
         $about = new About();
 
+        $about->setId($request->request->get('id'));
+        $about->setName($request->request->get('name'));
+        $about->setDescription($request->request->get('description'));
+        $about->setActive(1);
+
+        $repository = $this->getDoctrine()->getEntityManager();
+        $repository->merge($about);
+        $repository->flush();
+
+        return $this->redirectToRoute('global_index');
+    }
+
+    public function addAction(Request $request)
+    {
+        $about = new About();
+
+        $about->setName($request->request->get('name'));
+        $about->setDescription($request->request->get('description'));
+        $about->setActive(1);
+
+        $repository = $this->getDoctrine()->getEntityManager();
+        $repository->persist($about);
+        $repository->flush();
+
+        return $this->redirectToRoute('global_index');
+    }
+
+    public function deleteAction($id)
+    {
+        $repository = $this->getDoctrine()->getEntityManager();
+        $about = $repository->getReference('GlobalBundle:About', $id);
+        $about->setactive(0);
+        $repository->flush();
+
+        return $this->redirectToRoute('global_index');
+    }
+
+    public function newAction(Request $request)
+    {
+
+        $about = new About();
         $about->setActive(1);
 
         $form = $this->createFormBuilder($about)
@@ -55,7 +80,7 @@ class AboutController extends Controller
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $repository = $this->getDoctrine()->getEntityManager();
             $repository->persist($about);

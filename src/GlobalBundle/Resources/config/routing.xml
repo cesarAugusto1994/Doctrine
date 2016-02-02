@@ -6,10 +6,16 @@
   <route id="global_index" path="/about">
     <default key="_controller">GlobalBundle:About:about</default>
   </route>
-  <route id="global_addAbout" path="/addAbout">
-    <default key="_controller">GlobalBundle:About:add</default>
-  </route>
   <route id="global_formAbout" path="/formAbout">
     <default key="_controller">GlobalBundle:About:new</default>
+  </route>
+  <route id="global_editAbout" path="/editAbout">
+    <default key="_controller">GlobalBundle:About:edit</default>
+  </route>
+  <route id="global_deleteAbout" path="/deleteAbout/{id}">
+    <default key="_controller">GlobalBundle:About:delete</default>
+  </route>
+  <route id="global_addAbout" path="/addAbout">
+    <default key="_controller">GlobalBundle:About:add</default>
   </route>
 </routes>

@@ -2,62 +2,133 @@
 
 {% block title %}Sobre{% endblock %}
 
+{% block stylesheets %}
+    <script type="text/javascript">
+        $(document).on("click", "#bt", function () {
+            var id = $(this).data('id');
+            var name = $(this).data('name');
+            var description = $(this).data('description');
+            $(".modal-body #idAbout").val(id);
+            $(".modal-body #nameAbout").val(name);
+            $(".modal-body #descriptionAbout").val(description);
+        });
+    </script>
+
+{% endblock %}
+
 {% block body %}
 
     <div class="container-fluid">
 
-        <table class="table table-bordered table-hovered">
-            <caption>About table</caption>
-            <tbody>
-            {% for reg in about %}
+        <div class="well-sm">
+            <a href="#" data-toggle="modal"
+               data-target="#modalCadastro">
+                <button class="btn btn-link glyphicon-bishop"> Novo Registro</button>
+            </a>
+        </div>
 
-                <tr>
-                    <td><button type="button" id="bt" class="btn btn-link glyphicon-edit" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Edit</button></td>
-                    <td>{{ reg.name|upper }}</td>
-                    <td>{{ reg.description }}</td>
-                </tr>
-
-            {% endfor %}
-            </tbody>
-        </table>
-
-        <a href="{{ path('global_formAbout') }}"><button class="btn btn-link glyphicon-bishop"> New Row... </button></a>
-        <a href="{{ path('global_formAbout') }}"><button class="btn btn-info glyphicon-alert"> << Back </button></a>
-
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">About table</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered table-responsive">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for reg in about %}
+                        <tr>
+                            <td>
+                                <div id="options-table" class="dropdown">
+                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        <span class="glyphicon glyphicon-option-horizontal"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li><a href="#" id="bt" data-toggle="modal"
+                                               data-target="#exampleModal" data-id="{{ reg.id }}"
+                                               data-name="{{ reg.name }}"
+                                               data-description="{{ reg.description }}"><span
+                                                        class="glyphicon glyphicon-tasks"></span> Edit</a></li>
+                                        <li><a href="{{ path('global_deleteAbout', { 'id' : reg.id }) }}"><span
+                                                        class="glyphicon glyphicon-remove-circle"></span> Delete</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                            <td>{{ reg.id }}</td>
+                            <td>{{ reg.name }}</td>
+                            <td>{{ reg.description }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">Edit About</h4>
                 </div>
-                <div class="modal-body">
-                    <form>
+                <form method="post" action="{{ path('global_editAbout') }}">
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="idAbout">
                         <div class="form-group">
-                            <label for="recipient-name" class="control-label">Recipient:</label>
-                            <input type="text" class="form-control" id="recipient-name">
+                            <label for="recipient-name" class="control-label">Title:</label>
+                            <input type="text" class="form-control" id="nameAbout" name="name">
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="control-label">Message:</label>
-                            <textarea class="form-control" id="message-text"></textarea>
+                            <label for="message-text" class="control-label">Description:</label>
+                            <textarea class="form-control" id="descriptionAbout" name="description"></textarea>
                         </div>
-                    </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalCadastro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">New About</h4>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Send message</button>
-                </div>
+                <form method="post" action="{{ path('global_addAbout') }}">
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="idAbout">
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">Title:</label>
+                            <input type="text" class="form-control" id="nameAbout" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">Description:</label>
+                            <textarea class="form-control" id="descriptionAbout" name="description"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">New</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
 {% endblock %}
-
-{% block javascripts %}
-
-    <script type="text/javascript"></script>
-
-{% endblock %}
-
