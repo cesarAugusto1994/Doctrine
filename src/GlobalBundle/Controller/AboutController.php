@@ -25,6 +25,26 @@ class AboutController extends Controller
         return $this->render('GlobalBundle:About:index.html.twig', array('about' => $find->findBy(['active' => 1])));
     }
 
+    public function findAboutByActiveAction($active)
+    {
+        $repository = $this->getDoctrine()->getEntityManager();
+        $find = $repository->getRepository('GlobalBundle:About');
+
+        switch ($active) {
+            case 'Active':
+                $filter = $find->findBy(['active' => 1]);
+                break;
+            case 'Inactive':
+                $filter = $find->findBy(['active' => 0]);
+                break;
+            default:
+                $filter = $find->findAll();
+                break;
+        }
+
+        return $this->render('GlobalBundle:About:index.html.twig', array('about' => $filter));
+    }
+
     public function EditAction(Request $request)
     {
         $about = new About();
@@ -32,11 +52,16 @@ class AboutController extends Controller
         $about->setId($request->request->get('id'));
         $about->setName($request->request->get('name'));
         $about->setDescription($request->request->get('description'));
-        $about->setActive(1);
+        $about->setActive($request->request->get('active'));
+
 
         $repository = $this->getDoctrine()->getEntityManager();
         $repository->merge($about);
         $repository->flush();
+
+        if(!$request->request->get('active')){
+            return $this->redirectToRoute('global_ActiveAbout', array('active' => 'Inactive'));
+        }
 
         return $this->redirectToRoute('global_index');
     }
