@@ -22,113 +22,85 @@
         })
     </script>
 
+    <script type="text/javascript">
+        jQuery('ul.nav li.dropdown').hover(function() {
+            jQuery(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn();
+        }, function() {
+            jQuery(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut();
+        });
+    </script>
+
+    <style type="text/css">
+        a.menu:after, .dropdown-toggle:after {
+            content: none;
+        }
+        ul.nav li.dropdown:hover ul.dropdown-menu{
+            display: block;
+        }
+    </style>
+
 {% endblock %}
 
 {% block body %}
 
-<div class="container-fluid">
-    <div class="well-sm">
-        <a href="#" data-toggle="modal"
-           data-target="#modalCadastro">
-            <button class="btn btn-link glyphicon-bishop"> Novo Registro</button>
-        </a>
-        <a href="{{ path('global_ActiveAbout', {'active': 'Active'}) }}">
-            <button class="btn btn-link"><span class="glyphicon glyphicon-star"> Active</span></button>
-        </a>
-        <a href="{{ path('global_ActiveAbout', {'active': 'Inactive'}) }}">
-            <button class="btn btn-link"><span class="glyphicon glyphicon-star-empty"> Inactives</span></button>
-        </a>
-        <a href="{{ path('global_ActiveAbout', {'active': 'All'}) }}">
-            <button class="btn btn-link"><span class="glyphicon glyphicon-menu-hamburger"> All</span></button>
-        </a>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">About table</h3>
+    <div class="container-fluid">
+        <div class="well-sm">
+            <a href="#" data-toggle="modal"
+               data-target="#modalCadastro">
+                <button class="btn btn-link">New Record</button></a>
+            <a href="{{ path('global_ActiveAbout', {'active': 'Active'}) }}">
+                <button class="btn btn-success">Active</button></a>
+            <a href="{{ path('global_ActiveAbout', {'active': 'Inactive'}) }}">
+                <button class="btn btn-danger">Inactives</button></a>
+            <a href="{{ path('global_ActiveAbout', {'active': 'All'}) }}">
+                <button class="btn btn-primary">All</button></a>
         </div>
-        <div class="panel-body">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">About table</h3>
+            </div>
+            <div class="panel-body">
 
-            <div class="bs-example bs-example-tabs" data-example-id="togglable-tabs">
-                <ul id="myTabs" class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab"
-                                                              aria-controls="home" aria-expanded="true">Home</a>
-                    </li>
-                    <li role="presentation" class=""><a href="#profile" role="tab" id="profile-tab" data-toggle="tab"
-                                                        aria-controls="profile" aria-expanded="false">Cards</a>
-                    </li>
-                </ul>
-                <div id="myTabContent" class="tab-content">
-                    <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
+                <div class="bs-example bs-example-tabs" data-example-id="togglable-tabs">
+                    <ul id="myTabs" class="nav nav-pills" role="tablist">
+                        <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab"
+                                                                  data-toggle="tab"
+                                                                  aria-controls="home" aria-expanded="true">Home</a>
+                        </li>
+                        <li role="presentation" class=""><a href="#profile" role="tab" id="profile-tab"
+                                                            data-toggle="tab"
+                                                            aria-controls="profile" aria-expanded="false">Cards</a>
+                        </li>
+                        <li role="presentation" class=""><a href="#accordion" role="tab" id="accordion-tab"
+                                                            data-toggle="tab"
+                                                            aria-controls="accordion"
+                                                            aria-expanded="false">Accordion</a>
+                        </li>
+                        <li role="presentation" class=""><a href="#video" role="tab" id="video-tab"
+                                                            data-toggle="tab"
+                                                            aria-controls="video"
+                                                            aria-expanded="false">Video</a>
+                        </li>
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
 
-                        <div class="well-sm">
-                            <table class="table table-bordered table-responsive">
-                                <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>ID</th>
-                                    <th>Title</th>
-                                    <th>Description</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for reg in about %}
+                            <div class="well-sm">
+                                <table class="table table-bordered table-responsive">
+                                    <thead>
                                     <tr>
-                                        <td>
-                                            <div id="options-table" class="dropdown">
-                                                <button class="btn btn-default dropdown-toggle" type="button"
-                                                        id="dropdownMenu1"
-                                                        data-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="true">
-                                                    <span class="glyphicon glyphicon-option-horizontal"></span>
-                                                </button>
-                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                    <li><a href="#" id="bt" data-toggle="modal"
-                                                           data-target="#exampleModal" data-id="{{ reg.id }}"
-                                                           data-name="{{ reg.name }}"
-                                                           data-description="{{ reg.description }}"
-                                                           data-active="{{ reg.active }}"><span
-                                                                    class="glyphicon glyphicon-tasks"></span> Edit</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="{{ path('global_deleteAbout', { 'id' : reg.id }) }}"><span
-                                                                    class="glyphicon glyphicon-remove-circle"></span>
-                                                            Delete</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                        <td>{{ reg.id }}</td>
-                                        <td>{{ reg.name }}</td>
-                                        <td>{{ reg.description }}</td>
+                                        <th></th>
+                                        <th>ID</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
                                     </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-                    <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
-
-                        <div class="well-sm">
-
-                            <div class="row">
-                                {% for reg in about %}
-                                    <div class="col-sm-4 col-md-2 col-lg-2">
-                                        <div class="thumbnail">
-                                            <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQyIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDI0MiAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzEwMCV4MjAwCkNyZWF0ZWQgd2l0aCBIb2xkZXIuanMgMi42LjAuCkxlYXJuIG1vcmUgYXQgaHR0cDovL2hvbGRlcmpzLmNvbQooYykgMjAxMi0yMDE1IEl2YW4gTWFsb3BpbnNreSAtIGh0dHA6Ly9pbXNreS5jbwotLT48ZGVmcz48c3R5bGUgdHlwZT0idGV4dC9jc3MiPjwhW0NEQVRBWyNob2xkZXJfMTUyYTMzNzM2OTUgdGV4dCB7IGZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMnB0IH0gXV0+PC9zdHlsZT48L2RlZnM+PGcgaWQ9ImhvbGRlcl8xNTJhMzM3MzY5NSI+PHJlY3Qgd2lkdGg9IjI0MiIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSI4OS44NTkzNzUiIHk9IjEwNS4xIj4yNDJ4MjAwPC90ZXh0PjwvZz48L2c+PC9zdmc+"
-                                                 alt="..." class="img img-responsive">
-                                            <div class="caption">
-                                                <h3>{{ reg.name }}</h3>
-                                                <p title="{{ reg.description }}" data-toggle="tooltip"
-                                                   data-placement="bottom">
-                                                    {% if reg.description|length > 50 %}
-                                                        {{ reg.description|slice(0, 50) }}...
-                                                    {% else %}
-                                                        {{ reg.description }}
-                                                    {% endif %}
-                                                </p>
+                                    </thead>
+                                    <tbody>
+                                    {% for reg in about %}
+                                        <tr>
+                                            <td>
                                                 <div id="options-table" class="dropdown">
-                                                    <button class="btn btn-default dropdown-toggle" type="button"
+                                                    <button class="btn btn-link dropdown-toggle" type="button"
                                                             id="dropdownMenu1"
                                                             data-toggle="dropdown" aria-haspopup="true"
                                                             aria-expanded="true">
@@ -136,6 +108,13 @@
                                                     </button>
                                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                                         <li><a href="#" id="bt" data-toggle="modal"
+                                                               data-target="#viewModal" data-id="{{ reg.id }}"
+                                                               data-name="{{ reg.name }}"
+                                                               data-description="{{ reg.description }}"
+                                                               data-active="{{ reg.active }}"><span
+                                                                        class="glyphicon glyphicon-th"></span>
+                                                                Details</a>
+                                                            <a href="#" id="bt" data-toggle="modal"
                                                                data-target="#exampleModal" data-id="{{ reg.id }}"
                                                                data-name="{{ reg.name }}"
                                                                data-description="{{ reg.description }}"
@@ -150,75 +129,259 @@
                                                         </li>
                                                     </ul>
                                                 </div>
+                                            </td>
+                                            <td>{{ reg.id }}</td>
+                                            <td>{{ reg.name }}</td>
+                                            <td>{{ reg.description }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
+
+                            <div class="well-sm">
+                                <div class="row">
+                                    {% for reg in about %}
+                                        <div class="col-sm-4 col-md-2 col-lg-2">
+                                            <div class="thumbnail" style="min-width: 120px;">
+                                                <img src="{{ reg.url }}"
+                                                     alt="..." class="img img-responsive" style="max-width: 120px;">
+                                                <div class="caption">
+                                                    <h4>{{ reg.name }}</h4>
+                                                    <p title="{{ reg.description }}" data-toggle="tooltip"
+                                                       data-placement="bottom">
+                                                        {% if reg.description|length > 50 %}
+                                                            {{ reg.description|slice(0, 50) }}...
+                                                        {% else %}
+                                                            {{ reg.description }}
+                                                        {% endif %}
+                                                    </p>
+                                                    <div id="options-table" class="dropdown">
+                                                        <button class="btn btn-link dropdown-toggle" type="button"
+                                                                id="dropdownMenu1"
+                                                                data-toggle="dropdown" aria-haspopup="true"
+                                                                aria-expanded="true">
+                                                            <span class="glyphicon glyphicon-option-horizontal"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                            <li>
+                                                                <a href="#" id="bt" data-toggle="modal"
+                                                                   data-target="#viewModal" data-id="{{ reg.id }}"
+                                                                   data-name="{{ reg.name }}"
+                                                                   data-description="{{ reg.description }}"
+                                                                   data-active="{{ reg.active }}"><span
+                                                                            class="glyphicon glyphicon-th"></span>
+                                                                    Details</a>
+                                                            </li>
+                                                            <li><a href="#" id="bt" data-toggle="modal"
+                                                                   data-target="#exampleModal" data-id="{{ reg.id }}"
+                                                                   data-name="{{ reg.name }}"
+                                                                   data-description="{{ reg.description }}"
+                                                                   data-active="{{ reg.active }}"><span
+                                                                            class="glyphicon glyphicon-tasks"></span>
+                                                                    Edit</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ path('global_deleteAbout', { 'id' : reg.id }) }}"><span
+                                                                            class="glyphicon glyphicon-remove-circle"></span>
+                                                                    Delete</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane fade" id="accordion" aria-labelledby="accordion-tab">
+
+                            <div class="well-sm">
+                                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingOne">
+                                            <h4 class="panel-title">
+                                                <a role="button" data-toggle="collapse" data-parent="#accordion"
+                                                   href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                    Collapsible Group Item #1
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
+                                             aria-labelledby="headingOne">
+                                            <div class="panel-body">
+                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
+                                                terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
+                                                skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+                                                Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
+                                                single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
+                                                helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+                                                proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
+                                                beer farm-to-table, raw denim aesthetic synth nesciunt you probably
+                                                haven't heard of them accusamus labore sustainable VHS.
                                             </div>
                                         </div>
                                     </div>
-                                {% endfor %}
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingTwo">
+                                            <h4 class="panel-title">
+                                                <a class="collapsed" role="button" data-toggle="collapse"
+                                                   data-parent="#accordion" href="#collapseTwo" aria-expanded="false"
+                                                   aria-controls="collapseTwo">
+                                                    Collapsible Group Item #2
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
+                                             aria-labelledby="headingTwo">
+                                            <div class="panel-body">
+                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
+                                                terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
+                                                skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+                                                Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
+                                                single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
+                                                helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+                                                proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
+                                                beer farm-to-table, raw denim aesthetic synth nesciunt you probably
+                                                haven't heard of them accusamus labore sustainable VHS.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingThree">
+                                            <h4 class="panel-title">
+                                                <a class="collapsed" role="button" data-toggle="collapse"
+                                                   data-parent="#accordion" href="#collapseThree" aria-expanded="false"
+                                                   aria-controls="collapseThree">
+                                                    Collapsible Group Item #3
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
+                                             aria-labelledby="headingThree">
+                                            <div class="panel-body">
+                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
+                                                terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
+                                                skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+                                                Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid
+                                                single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
+                                                helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+                                                proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
+                                                beer farm-to-table, raw denim aesthetic synth nesciunt you probably
+                                                haven't heard of them accusamus labore sustainable VHS.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div> <!--Tab Accordion-->
+
+                        <div role="tabpanel" class="tab-pane fade" id="video" aria-labelledby="video-tab">
+                            <div class="well-sm">
+                                <div class="bs-example" data-example-id="responsive-embed-16by9-iframe-youtube">
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <iframe class="embed-responsive-item"
+                                                src="//www.youtube.com/embed/zpOULjyy-n8?rel=0"
+                                                allowfullscreen=""></iframe>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-    </div>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="exampleModalLabel">Edit About</h4>
-                </div>
-                <form method="post" action="{{ path('global_editAbout') }}">
+        <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">View About</h4>
+                    </div>
                     <div class="modal-body">
                         <input type="hidden" name="id" id="idAbout">
                         <input type="hidden" name="active" id="activeAbout">
                         <div class="form-group">
-                            <label for="recipient-name" class="control-label">Title:</label>
+                            <label for="nameAbout" class="control-label">Title:</label>
                             <input type="text" class="form-control" id="nameAbout" name="name">
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="control-label">Description:</label>
+                            <label for="descriptionAbout" class="control-label">Description:</label>
                             <textarea class="form-control" id="descriptionAbout" name="description"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Edit</button>
                     </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="modalCadastro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="exampleModalLabel">New About</h4>
                 </div>
-                <form method="post" action="{{ path('global_addAbout') }}">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="nameNewAbout" class="control-label">Title:</label>
-                            <input type="text" class="form-control" id="nameNewAbout" name="name">
-                        </div>
-                        <div class="form-group">
-                            <label for="descriptionNewAbout" class="control-label">Description:</label>
-                            <textarea class="form-control" id="descriptionNewAbout" name="description"></textarea>
-                        </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Edit About</h4>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">New</button>
+                    <form method="post" action="{{ path('global_editAbout') }}">
+                        <div class="modal-body">
+                            <input type="hidden" name="id" id="idAbout">
+                            <input type="hidden" name="active" id="activeAbout">
+                            <div class="form-group">
+                                <label for="recipient-name" class="control-label">Title:</label>
+                                <input type="text" class="form-control" id="nameAbout" name="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="control-label">Description:</label>
+                                <textarea class="form-control" id="descriptionAbout" name="description"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Edit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalCadastro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">New About</h4>
                     </div>
-                </form>
+                    <form method="post" action="{{ path('global_addAbout') }}">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="nameNewAbout" class="control-label">Title:</label>
+                                <input type="text" class="form-control" id="nameNewAbout" name="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="descriptionNewAbout" class="control-label">Description:</label>
+                                <textarea class="form-control" id="descriptionNewAbout" name="description"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">New</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-
-    {% endblock %}
+{% endblock %}
