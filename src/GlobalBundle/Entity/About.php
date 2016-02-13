@@ -43,6 +43,13 @@ class About
     private $active;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="url", type="string")
+     */
+    private $url;
+
+    /**
      * @param int $id
      */
     public function setId($id)
@@ -130,6 +137,22 @@ class About
     public function getActive()
     {
         return $this->active;
+    }
+
+    /**
+     * @param $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
     }
 }
 

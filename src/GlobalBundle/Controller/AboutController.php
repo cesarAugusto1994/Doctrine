@@ -47,16 +47,13 @@ class AboutController extends Controller
 
     public function EditAction(Request $request)
     {
-        $about = new About();
+        $repository = $this->getDoctrine()->getEntityManager();
+        $about = $repository->getReference('GlobalBundle:About', $request->request->get('id'));
 
-        $about->setId($request->request->get('id'));
         $about->setName($request->request->get('name'));
         $about->setDescription($request->request->get('description'));
         $about->setActive($request->request->get('active'));
 
-
-        $repository = $this->getDoctrine()->getEntityManager();
-        $repository->merge($about);
         $repository->flush();
 
         if(!$request->request->get('active')){
