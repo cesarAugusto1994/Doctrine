@@ -21,4 +21,7 @@
   <route id="global_addAbout" path="/addAbout">
     <default key="_controller">GlobalBundle:About:add</default>
   </route>
+  <route id="global_box" path="/box">
+    <default key="_controller">GlobalBundle:About:box</default>
+  </route>
 </routes>

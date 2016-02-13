@@ -113,4 +113,10 @@ class AboutController extends Controller
 
         return $this->render('GlobalBundle:About:form.html.twig', array('form' => $form->createView()));
     }
+
+    public function boxAction(){
+
+        return $this->render('@Global/About/box.html.twig', array());
+
+    }
 }

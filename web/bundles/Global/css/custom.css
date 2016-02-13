@@ -18,7 +18,24 @@ body {
     -webkit-box-shadow: 0 10px 6px -6px #777;
     -moz-box-shadow: 0 10px 6px -6px #777;
     box-shadow: 0 10px 6px -6px #777;
-    overflow-x: scroll;
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+}
+
+.wrap2 {
+    background: #fff;
+    margin: 20px auto;
+    float: left;
+    display: block;
+    width: 25px;
+    height: 200px;
+    padding: 20px;
+    border-radius: 2px 2px 2px 2px;
+    -webkit-box-shadow: 0 10px 6px -6px #777;
+    -moz-box-shadow: 0 10px 6px -6px #777;
+    box-shadow: 0 10px 6px -6px #777;
+    overflow-x: hidden;
     overflow-y: hidden;
 
 }
