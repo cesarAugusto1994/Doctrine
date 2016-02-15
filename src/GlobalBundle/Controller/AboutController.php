@@ -25,6 +25,14 @@ class AboutController extends Controller
         return $this->render('GlobalBundle:About:index.html.twig', array('about' => $find->findBy(['active' => 1])));
     }
 
+    public function boxAction()
+    {
+        $repository = $this->getDoctrine()->getEntityManager();
+        $find = $repository->getRepository('GlobalBundle:About');
+
+        return $this->render('box2.html.twig', array('about' => $find->findBy(['active' => 1])));
+    }
+
     public function findAboutByActiveAction($active)
     {
         $repository = $this->getDoctrine()->getEntityManager();
@@ -114,9 +122,4 @@ class AboutController extends Controller
         return $this->render('GlobalBundle:About:form.html.twig', array('form' => $form->createView()));
     }
 
-    public function boxAction(){
-
-        return $this->render('@Global/About/box.html.twig', array());
-
-    }
 }

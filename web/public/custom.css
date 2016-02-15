@@ -1,6 +1,5 @@
-
 body {
-    font-size: 11px;
+    font-size: 12px;
     font-family: 'Open Sans', sans-serif;
     color: #4A4A4A;
     /*text-align: center;*/
@@ -9,7 +8,7 @@ body {
 
 .wrap {
     background: #fff;
-    margin: 20px auto;
+    margin: 10px auto;
     display: block;
     width: 1268px;
     height: auto;
@@ -18,26 +17,46 @@ body {
     -webkit-box-shadow: 0 10px 6px -6px #777;
     -moz-box-shadow: 0 10px 6px -6px #777;
     box-shadow: 0 10px 6px -6px #777;
-    overflow-x: hidden;
+    overflow-x: visible;
     overflow-y: hidden;
 
 }
 
-.wrap2 {
+.wrap-medium {
     background: #fff;
-    margin: 20px auto;
-    float: left;
-    display: block;
-    width: 25px;
-    height: 200px;
+    margin: 10px;
+    display: inline-block;
+    /*float: left;*/
+    width: 624px;
+    height: auto;
     padding: 20px;
     border-radius: 2px 2px 2px 2px;
     -webkit-box-shadow: 0 10px 6px -6px #777;
     -moz-box-shadow: 0 10px 6px -6px #777;
     box-shadow: 0 10px 6px -6px #777;
-    overflow-x: hidden;
+    overflow-x: visible;
     overflow-y: hidden;
 
+}
+.wrap-content{
+    margin-left: 30px;
+}
+
+.wrap-image{
+    width: 30%;
+    height: 70%;
+    float: left;
+    text-align: center;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+}
+
+.wrap-text{
+    width: 70%;
+    float: right;
 }
 
 p {
