@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="258482845">
+  <component name="DataSourceManagerImpl" format="xml" hash="2182144613">
     <data-source source="LOCAL" name="MySQL - doctrine@localhost" uuid="8304c918-525b-4d62-b6c9-35f65a7f446c">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>

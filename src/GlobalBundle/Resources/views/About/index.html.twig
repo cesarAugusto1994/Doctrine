@@ -23,9 +23,9 @@
     </script>
 
     <script type="text/javascript">
-        jQuery('ul.nav li.dropdown').hover(function() {
+        jQuery('ul.nav li.dropdown').hover(function () {
             jQuery(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn();
-        }, function() {
+        }, function () {
             jQuery(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut();
         });
     </script>
@@ -34,7 +34,8 @@
         a.menu:after, .dropdown-toggle:after {
             content: none;
         }
-        ul.nav li.dropdown:hover ul.dropdown-menu{
+
+        ul.nav li.dropdown:hover ul.dropdown-menu {
             display: block;
         }
     </style>
@@ -43,18 +44,34 @@
 
 {% block body %}
 
-    <div class="container-fluid">
-        <div class="well-sm">
+    <div class="container">
+
+        <ol class="breadcrumb">
+            <li class="active">Home</li>
+        </ol>
+
+        <div class="well well-sm">
             <a href="#" data-toggle="modal"
                data-target="#modalCadastro">
-                <button class="btn btn-link">New Record</button></a>
-            <a href="{{ path('global_ActiveAbout', {'active': 'Active'}) }}">
-                <button class="btn btn-success">Active</button></a>
-            <a href="{{ path('global_ActiveAbout', {'active': 'Inactive'}) }}">
-                <button class="btn btn-danger">Inactives</button></a>
-            <a href="{{ path('global_ActiveAbout', {'active': 'All'}) }}">
-                <button class="btn btn-primary">All</button></a>
+                <button class="btn btn-link">
+                    New Record
+                </button>
+            </a>
+
+            <div class="btn-group" style="float: right" role="toolbar" aria-label="...">
+
+                <a href="{{ path('global_ActiveAbout', {'active': 'Active'}) }}">
+                    <button class="btn btn-default">Active</button></a>
+
+                <a href="{{ path('global_ActiveAbout', {'active': 'Inactive'}) }}">
+                    <button class="btn btn-default">Inactives</button></a>
+
+                <a href="{{ path('global_ActiveAbout', {'active': 'All'}) }}">
+                    <button class="btn btn-default">All</button></a>
+
+            </div>
         </div>
+
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">About table</h3>
@@ -62,7 +79,7 @@
             <div class="panel-body">
 
                 <div class="bs-example bs-example-tabs" data-example-id="togglable-tabs">
-                    <ul id="myTabs" class="nav nav-pills" role="tablist">
+                    <ul id="myTabs" class="nav nav-tabs" role="tablist">
                         <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab"
                                                                   data-toggle="tab"
                                                                   aria-controls="home" aria-expanded="true">Home</a>
