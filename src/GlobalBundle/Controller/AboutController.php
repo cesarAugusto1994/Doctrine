@@ -30,7 +30,7 @@ class AboutController extends Controller
         $repository = $this->getDoctrine()->getEntityManager();
         $find = $repository->getRepository('GlobalBundle:About');
 
-        return $this->render('box2.html.twig', array('about' => $find->findBy(['active' => 1])));
+        return $this->render('@Global/About/box.html.twig', array('about' => $find->findBy(['active' => 1])));
     }
 
     public function findAboutByActiveAction($active)

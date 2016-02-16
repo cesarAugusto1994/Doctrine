@@ -23,9 +23,9 @@
     </script>
 
     <script type="text/javascript">
-        jQuery('ul.nav li.dropdown').hover(function() {
+        jQuery('ul.nav li.dropdown').hover(function () {
             jQuery(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn();
-        }, function() {
+        }, function () {
             jQuery(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut();
         });
     </script>
@@ -34,7 +34,8 @@
         a.menu:after, .dropdown-toggle:after {
             content: none;
         }
-        ul.nav li.dropdown:hover ul.dropdown-menu{
+
+        ul.nav li.dropdown:hover ul.dropdown-menu {
             display: block;
         }
     </style>
@@ -43,26 +44,43 @@
 
 {% block body %}
 
-    <div class="container-fluid">
-        <div class="well-sm">
-            <a href="#" data-toggle="modal"
-               data-target="#modalCadastro">
-                <button class="btn btn-link">New Record</button></a>
-            <a href="{{ path('global_ActiveAbout', {'active': 'Active'}) }}">
-                <button class="btn btn-success">Active</button></a>
-            <a href="{{ path('global_ActiveAbout', {'active': 'Inactive'}) }}">
-                <button class="btn btn-danger">Inactives</button></a>
-            <a href="{{ path('global_ActiveAbout', {'active': 'All'}) }}">
-                <button class="btn btn-primary">All</button></a>
-        </div>
+    <div class="container">
+
+        <ol class="breadcrumb">
+            <li class="active">Home</li>
+        </ol>
+
+
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">About table</h3>
             </div>
             <div class="panel-body">
 
+                <div class="well well-sm">
+                    <a href="#" data-toggle="modal"
+                       data-target="#modalCadastro">
+                        <button class="btn btn-link">
+                            New Record
+                        </button>
+                    </a>
+
+                    <div class="btn-group" style="float: right" role="toolbar" aria-label="...">
+
+                        <a href="{{ path('global_ActiveAbout', {'active': 'Active'}) }}">
+                            <button class="btn btn-default">Active</button></a>
+
+                        <a href="{{ path('global_ActiveAbout', {'active': 'Inactive'}) }}">
+                            <button class="btn btn-default">Inactives</button></a>
+
+                        <a href="{{ path('global_ActiveAbout', {'active': 'All'}) }}">
+                            <button class="btn btn-default">All</button></a>
+
+                    </div>
+                </div>
+
                 <div class="bs-example bs-example-tabs" data-example-id="togglable-tabs">
-                    <ul id="myTabs" class="nav nav-pills" role="tablist">
+                    <ul id="myTabs" class="nav nav-tabs" role="tablist">
                         <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab"
                                                                   data-toggle="tab"
                                                                   aria-controls="home" aria-expanded="true">Home</a>
@@ -75,6 +93,11 @@
                                                             data-toggle="tab"
                                                             aria-controls="accordion"
                                                             aria-expanded="false">Accordion</a>
+                        </li>
+                        <li role="presentation" class=""><a href="#blocks" role="tab" id="blocks-tab"
+                                                            data-toggle="tab"
+                                                            aria-controls="blocks"
+                                                            aria-expanded="false">Blocks</a>
                         </li>
                         <li role="presentation" class=""><a href="#video" role="tab" id="video-tab"
                                                             data-toggle="tab"
@@ -281,6 +304,52 @@
                                 </div>
 
                             </div>
+                        </div> <!--Tab Accordion-->
+
+                        <div role="tabpanel" class="tab-pane fade" id="blocks" aria-labelledby="blocks-tab">
+
+                                <div class="wrap-body">
+
+                                    {% for reg in about %}
+
+                                    <div class="wrap2">
+
+                                        <div class="btn-group button-menu-wrap">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                                    aria-haspopup="true" aria-expanded="false">
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a href="#" id="bt" data-toggle="modal"
+                                                       data-target="#viewModal">
+                                                        Edit</a>
+                                                <li><a href="#">Remove</a></li>
+                                                <li role="separator" class="divider"></li>
+                                                <li><a href="#">More...</a></li>
+                                            </ul>
+                                        </div>
+
+                                        <h1>{{ reg.name }}</h1>
+
+                                        <h5>{{ "now"|date("d/m/Y H:i:s") }}</h5>
+
+                                        <div class="wrap-separator"></div>
+
+                                        <div class="wrap-image">
+                                            <img class="image" src="{{ reg.url }}">
+                                        </div>
+
+                                        <div class="wrap-text">
+                                            <p>{{ reg.description }}</p>
+                                        </div>
+
+                                    </div>
+
+                                    {% endfor %}
+
+                                </div>
+
                         </div> <!--Tab Accordion-->
 
                         <div role="tabpanel" class="tab-pane fade" id="video" aria-labelledby="video-tab">
