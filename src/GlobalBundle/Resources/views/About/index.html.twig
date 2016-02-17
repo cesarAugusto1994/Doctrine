@@ -3,6 +3,9 @@
 {% block title %}Sobre{% endblock %}
 
 {% block stylesheets %}
+
+    <script type="text/javascript" rel="stylesheet" src="{{ asset('public/js/pages/about_index.js') }}"></script>
+
     <script type="text/javascript">
         $(document).on("click", "#bt", function () {
             var id = $(this).data('id');
@@ -40,6 +43,8 @@
         }
     </style>
 
+
+
 {% endblock %}
 
 {% block body %}
@@ -65,16 +70,24 @@
                         </button>
                     </a>
 
+
+                    <button id="btn-action" class="btn btn-link">
+                        Action
+                    </button>
+
                     <div class="btn-group" style="float: right" role="toolbar" aria-label="...">
 
                         <a href="{{ path('global_ActiveAbout', {'active': 'Active'}) }}">
-                            <button class="btn btn-default">Active</button></a>
+                            <button class="btn btn-default">Active</button>
+                        </a>
 
                         <a href="{{ path('global_ActiveAbout', {'active': 'Inactive'}) }}">
-                            <button class="btn btn-default">Inactives</button></a>
+                            <button class="btn btn-default">Inactives</button>
+                        </a>
 
                         <a href="{{ path('global_ActiveAbout', {'active': 'All'}) }}">
-                            <button class="btn btn-default">All</button></a>
+                            <button class="btn btn-default">All</button>
+                        </a>
 
                     </div>
                 </div>
@@ -308,14 +321,15 @@
 
                         <div role="tabpanel" class="tab-pane fade" id="blocks" aria-labelledby="blocks-tab">
 
-                                <div class="wrap-body">
+                            <div class="wrap-body">
 
-                                    {% for reg in about %}
+                                {% for reg in about %}
 
                                     <div class="wrap2">
 
                                         <div class="btn-group button-menu-wrap">
-                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                                            <button type="button" class="btn btn-default dropdown-toggle"
+                                                    data-toggle="dropdown"
                                                     aria-haspopup="true" aria-expanded="false">
                                                 <span class="caret"></span>
                                             </button>
@@ -346,21 +360,14 @@
 
                                     </div>
 
-                                    {% endfor %}
+                                {% endfor %}
 
-                                </div>
+                            </div>
 
                         </div> <!--Tab Accordion-->
 
                         <div role="tabpanel" class="tab-pane fade" id="video" aria-labelledby="video-tab">
                             <div class="well-sm">
-                                <div class="bs-example" data-example-id="responsive-embed-16by9-iframe-youtube">
-                                    <div class="embed-responsive embed-responsive-16by9">
-                                        <iframe class="embed-responsive-item"
-                                                src="//www.youtube.com/embed/zpOULjyy-n8?rel=0"
-                                                allowfullscreen=""></iframe>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

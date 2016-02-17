@@ -17,12 +17,29 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class AboutController extends Controller
 {
-    public function aboutAction()
+    public function homeAction()
     {
         $repository = $this->getDoctrine()->getEntityManager();
         $find = $repository->getRepository('GlobalBundle:About');
 
         return $this->render('@Global/index.html.twig', array('about' => $find->findBy(['active' => 1])));
+    }
+
+    public function ajaxAction()
+    {
+        $isAjax = $this->get('Request')->isXMLHttpRequest();
+        if ($isAjax) {
+            return new Response('This is ajax response');
+        }
+        return new Response('This is not ajax!', 400);
+    }
+
+    public function aboutAction()
+    {
+        $repository = $this->getDoctrine()->getEntityManager();
+        $find = $repository->getRepository('GlobalBundle:About');
+
+        return $this->render('@Global/About/index.html.twig', array('about' => $find->findBy(['active' => 1])));
     }
 
     public function boxAction()

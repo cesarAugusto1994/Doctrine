@@ -7,9 +7,11 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('public/css/bootstrap.css') }}"/>
     <link rel="stylesheet" href="{{ asset('public/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset("public/css/custom.css") }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/sweetalert/dist/sweetalert.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/sweetalert/themes/google/google.css') }}">
+    <script src="{{ asset('public/sweetalert/dist/sweetalert.min.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
-
     {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 </head>
@@ -31,7 +33,8 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ path('global_index') }}">Home<span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="{{ path('global_home') }}">Home<span class="sr-only">(current)</span></a>
+                </li>
                 <li><a href="{{ path('global_index') }}">About</a></li>
                 <li><a href="{{ path('global_box') }}">Box</a></li>
             </ul>
